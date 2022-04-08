@@ -13,7 +13,7 @@ async def on_ready():
 @client.event
 #當有訊息時
 async def on_message(message):
-    
+
     # The text that you want to convert to audio
     mytext = ''
 
@@ -28,7 +28,7 @@ async def on_message(message):
 
     # Log Message
     print(mytext)
-    
+
     # Language in which you want to convert
     language = 'zh-tw'
 
