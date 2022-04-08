@@ -7,7 +7,7 @@
 python -m pip install --upgrade pip
 
 # dependency
-pip intall -U discord pygame gtts
+pip install -U discord pygame gtts
 ```
 
 - 新增bot_config.py
