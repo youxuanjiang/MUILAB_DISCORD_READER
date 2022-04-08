@@ -1,11 +1,10 @@
-#導入 Discord.py
 import discord
 from pygame import mixer
+from gtts import gTTS
 from bot_config import DISCORD_API_KEY
-#client 是我們與 Discord 連結的橋樑
+
 client = discord.Client()
 
-#調用 event 函式庫
 @client.event
 #當機器人完成啟動時
 async def on_ready():
@@ -14,16 +13,8 @@ async def on_ready():
 @client.event
 #當有訊息時
 async def on_message(message):
-    #排除自己的訊息，避免陷入無限循環
-    if message.author == client.user:
-        return
-
-    # Import the required module for text
-    # to speech conversion
-    from gtts import gTTS
-
-    # The text
-    # that you want to convert to audio
+    
+    # The text that you want to convert to audio
     mytext = ''
 
     if message.content.find("https://eats.uber.com/") != -1:
@@ -35,7 +26,9 @@ async def on_message(message):
     elif message.content.find("廣播 ") != -1:
         mytext = '等！登！登！登！你各位 M U I lab的各位注意，' + str(message.author.nick) + '想要宣布：' + message.content.split("廣播")[1]
 
+    # Log Message
     print(mytext)
+    
     # Language in which you want to convert
     language = 'zh-tw'
 
