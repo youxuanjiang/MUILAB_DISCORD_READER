@@ -31,10 +31,11 @@ async def on_message(message):
         mytext = str(message.author.nick) + '準備要來訂 foodpanda 的' + restaurant + '！你各位要訂的快點看Discord。'
 
     elif message.content.find("廣播 ") != -1:
-        mytext = 'M U I lab的各位！Oops！' + str(message.author.nick) + '想要宣布：' + message.content.split("廣播")[1]
+        mytext = str(message.author.nick) + '說' + message.content.split("廣播")[1]
 
     elif message.content.find("悄悄話 ") != -1:
         mytext = message.content.split("悄悄話")[1]
+        await message.delete()
 
     # Log Message
     print(mytext)
