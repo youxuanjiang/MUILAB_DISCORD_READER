@@ -1,6 +1,7 @@
 #導入 Discord.py
 import discord
 from pygame import mixer
+from bot_config import DISCORD_API_KEY
 #client 是我們與 Discord 連結的橋樑
 client = discord.Client()
 
@@ -21,10 +22,20 @@ async def on_message(message):
     # to speech conversion
     from gtts import gTTS
 
-    # The text that you want to convert to audio
-    mytext = str(message.author.nick) + '說' + message.content
-    print(mytext)
+    # The text
+    # that you want to convert to audio
+    mytext = ''
 
+    if message.content.find("https://eats.uber.com/") != -1:
+        restaurant = message.embeds[0].title.split('在')[1].split('的')[0]
+        mytext = str(message.author.nick) + '準備要來訂 Uber Eats 的' + restaurant + '！你！各！位！要訂的快點看Discord。'
+    elif message.content.find("https://foodpanda.page.link/") != -1:
+        restaurant = message.embeds[0].title.split('menu')[0]
+        mytext = str(message.author.nick) + '準備要來訂 foodpanda 的' + restaurant + '！你！各！位！要訂的快點看Discord。'
+    elif message.content.find("廣播 ") != -1:
+        mytext = '等！登！登！登！你各位 M U I lab的各位注意，' + str(message.author.nick) + '想要宣布：' + message.content.split("廣播")[1]
+
+    print(mytext)
     # Language in which you want to convert
     language = 'zh-tw'
 
@@ -35,11 +46,11 @@ async def on_message(message):
     myobj = gTTS(text=mytext, lang=language, slow=False)
 
     # Saving the converted audio in a mp3 file
-    myobj.save("welcome1.mp3")
+    myobj.save("read_sentance.mp3")
 
     # Play the audio
     mixer.init()
-    mixer.music.load('welcome1.mp3')
+    mixer.music.load('read_sentance.mp3')
     mixer.music.play()
 
-client.run('OTYxNTcxOTkxMzIyNzc1NTcz.Yk67sw.FFy2fJFkfSfs3s08DMvSWiAlHgA')
+client.run(DISCORD_API_KEY)
