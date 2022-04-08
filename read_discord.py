@@ -16,15 +16,25 @@ async def on_message(message):
 
     # The text that you want to convert to audio
     mytext = ''
+    restaurant = ''
 
     if message.content.find("https://eats.uber.com/") != -1:
-        restaurant = message.embeds[0].title.split('在')[1].split('的')[0]
-        mytext = str(message.author.nick) + '準備要來訂 Uber Eats 的' + restaurant + '！你！各！位！要訂的快點看Discord。'
+        # if cmp(message.embeds[0].title.split('在')[0], message.embeds[0].title):
+        if message.embeds[0].title.split('在')[0] == message.embeds[0].title:
+            restaurant = message.embeds[0].title.split('from')[1].split('|')[0]
+        else:
+            restaurant = message.embeds[0].title.split('在')[1].split('的')[0]
+        mytext = str(message.author.nick) + '準備要來訂 Uber Eats 的' + restaurant + '！你各位要訂的快點看Discord。'
+
     elif message.content.find("https://foodpanda.page.link/") != -1:
         restaurant = message.embeds[0].title.split('menu')[0]
-        mytext = str(message.author.nick) + '準備要來訂 foodpanda 的' + restaurant + '！你！各！位！要訂的快點看Discord。'
+        mytext = str(message.author.nick) + '準備要來訂 foodpanda 的' + restaurant + '！你各位要訂的快點看Discord。'
+
     elif message.content.find("廣播 ") != -1:
-        mytext = '等！登！登！登！你各位 M U I lab的各位注意，' + str(message.author.nick) + '想要宣布：' + message.content.split("廣播")[1]
+        mytext = 'M U I lab的各位！Oops！' + str(message.author.nick) + '想要宣布：' + message.content.split("廣播")[1]
+
+    elif message.content.find("悄悄話 ") != -1:
+        mytext = message.content.split("廣播")[1]
 
     # Log Message
     print(mytext)
