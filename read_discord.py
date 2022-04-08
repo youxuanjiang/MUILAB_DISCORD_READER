@@ -34,7 +34,7 @@ async def on_message(message):
         mytext = 'M U I lab的各位！Oops！' + str(message.author.nick) + '想要宣布：' + message.content.split("廣播")[1]
 
     elif message.content.find("悄悄話 ") != -1:
-        mytext = message.content.split("廣播")[1]
+        mytext = message.content.split("悄悄話")[1]
 
     # Log Message
     print(mytext)
